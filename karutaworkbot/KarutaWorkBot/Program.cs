@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
+using Discord.Rest;
 using Discord.WebSocket;
 using KarutaWorkBot.Modules;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,6 +28,12 @@ namespace KarutaWorkBot
         public static SocketUserMessage recentCollection;
         public static List<Card> recentCardList = new List<Card>();
         public static IMessageChannel commandChannel;
+
+        public static RestUserMessage guideMessage;
+        public static RestUserMessage viewMessage;
+        public static RestUserMessage workMessage;
+
+        public static bool disabled = true;
 
         public async Task RunBotAsync()
         {
@@ -97,7 +104,7 @@ namespace KarutaWorkBot
                 if (hasDescription)
                 {
                     //Console.WriteLine("Has description!");
-                    if (recentUser != null && embed1.Description.Contains($"Cards carried by <@{recentUser.Id}>")) // If it is a collection embed
+                    if (!disabled && recentUser != null && embed1.Description.Contains($"Cards carried by <@{recentUser.Id}>")) // If it is a collection embed
                     {
                         Console.WriteLine($"User was the recent user. [{recentUser.Username}]");
                         recentCollection = message;
@@ -140,7 +147,7 @@ namespace KarutaWorkBot
                         }
                         await checkCards(cardList, message);
                     }
-                    else if (recentCard != null && embed1.Description.Contains($"{recentCard.name}") && embed1.Title.Contains("Worker Details"))
+                    else if (!disabled && recentCard != null && embed1.Description.Contains($"{recentCard.name}") && embed1.Title.Contains("Worker Details"))
                     {
                         Console.WriteLine($"Character work info found for {recentCard.name}");
                         foreach (Card card in recentCardList)
@@ -173,11 +180,12 @@ namespace KarutaWorkBot
 
                             predictCard.quality = quality.ToString().Trim('`');
 
+                            await Task.Delay(1000);
                             predictCard.cardImage = (EmbedImage)embed1.Image;
                             predictCard.cardImageUrl = predictCard.cardImage.ProxyUrl;
 
                             await message.DeleteAsync();
-                            await context.Channel.SendMessageAsync($"kwi {predictCard.code}");
+                            workMessage = await context.Channel.SendMessageAsync($"kwi {predictCard.code}");
                         }
                         else
                         {
@@ -228,9 +236,6 @@ namespace KarutaWorkBot
                         predictCard.excellent = (int)(predictCard.damaged * 1.9 * 1.9 * 1.9);
                         predictCard.mint =      (int)(predictCard.damaged * 1.9 * 1.9 * 1.9 * 1.9);
 
-                        predictCard.charImage = (EmbedThumbnail)embed1.Thumbnail;
-                        predictCard.charImageUrl = predictCard.charImage.ProxyUrl;
-
                         var eb = new EmbedBuilder();
 
                         eb.WithColor(new Color(139, 71, 179));
@@ -245,10 +250,13 @@ namespace KarutaWorkBot
                                             $"★☆☆☆ · **{predictCard.poor}**\n" +
                                             $"☆☆☆☆ · **{predictCard.damaged}**\n");
 
-                        eb.WithThumbnailUrl(recentUser.GetAvatarUrl());
+                        //eb.WithThumbnailUrl(recentUser.GetAvatarUrl());
                         eb.WithImageUrl(predictCard.cardImageUrl);
 
                         await message.DeleteAsync();
+                        await guideMessage.DeleteAsync();
+                        await viewMessage.DeleteAsync();
+                        await workMessage.DeleteAsync();
                         await context.Channel.SendMessageAsync("", false, eb.Build());
                         recentUser = null;
                         predictCard = null;
@@ -260,12 +268,14 @@ namespace KarutaWorkBot
                 var result = await _commands.ExecuteAsync(context, argPos, _services);
                 if (!result.IsSuccess) Console.WriteLine(result.ErrorReason);
             }
-            //if (message.MentionedUsers == recentUser)
-            //{
-            //    Console.WriteLine(recentUser.Username + " was mentioned");
-            //    Emoji emoji = new Emoji(":arrow_right:");
-            //    await message.AddReactionAsync(emoji);
-            //}
+            if (predictCard != null && context.User == predictCard.user)
+            {
+                if (message.Content == $"kv {predictCard.code}" || message.Content == $"kwi {predictCard.code}")
+                {
+                    await Task.Delay(100);
+                    await message.DeleteAsync();
+                }
+            }
         }
 
         public async Task checkCards(List<Card> cards, SocketUserMessage message)

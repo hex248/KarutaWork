@@ -51,12 +51,13 @@ namespace KarutaWorkBot.Modules
             var eb = new EmbedBuilder();
             eb.WithTitle($"Copy my next messages and send them in the chat to receive the effort prediction of **`{code}`**");
 
-            await Context.Channel.SendMessageAsync("", false, eb.Build());
+            Program.guideMessage = await Context.Channel.SendMessageAsync("", false, eb.Build());
 
             Program.predictCard = new Card("", 0, "", "");
             Program.predictCard.code = code;
             Program.predictCard.user = Context.User;
-            await Context.Channel.SendMessageAsync($"kv {code}");
+
+            Program.viewMessage = await Context.Channel.SendMessageAsync($"kv {code}");
         }
     }
 }

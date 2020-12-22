@@ -15,8 +15,6 @@ namespace KarutaWorkBot
 
         public EmbedImage cardImage;
         public string cardImageUrl;
-        public EmbedThumbnail charImage;
-        public string charImageUrl;
 
         #region Work Info
         public int effort;

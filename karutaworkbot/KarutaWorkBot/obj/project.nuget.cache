@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "aY5fzHLKB4bZuUnc4M8R5yCrmyZWvaoAh8SrL8JnKmEkLTvm1Y5c1FEor/joqY/yFIau5NCDutwkLEX498NR6Q==",
+  "dgSpecHash": "5ufHDjTbhiLD/mWPimD+8nJtimk5Rhu2f7pCIG3Q7TYTwEVvDMchuihBqkOh8YFyLEHXuHLORFEAZR2Q4aqPXg==",
   "success": true,
-  "projectFilePath": "D:\\Programming\\CS\\KarutaWorkBot\\KarutaWorkBot\\KarutaWorkBot\\KarutaWorkBot.csproj",
+  "projectFilePath": "D:\\Programming\\CS\\KarutaWork\\KarutaWorkBot\\KarutaWorkBot\\KarutaWorkBot.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\oli\\.nuget\\packages\\discord.net\\2.2.0\\discord.net.2.2.0.nupkg.sha512",
     "C:\\Users\\oli\\.nuget\\packages\\discord.net.commands\\2.2.0\\discord.net.commands.2.2.0.nupkg.sha512",

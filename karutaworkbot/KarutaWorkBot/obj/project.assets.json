@@ -1531,11 +1531,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Programming\\CS\\KarutaWorkBot\\KarutaWorkBot\\KarutaWorkBot\\KarutaWorkBot.csproj",
+      "projectUniqueName": "D:\\Programming\\CS\\KarutaWork\\KarutaWorkBot\\KarutaWorkBot\\KarutaWorkBot.csproj",
       "projectName": "KarutaWorkBot",
-      "projectPath": "D:\\Programming\\CS\\KarutaWorkBot\\KarutaWorkBot\\KarutaWorkBot\\KarutaWorkBot.csproj",
+      "projectPath": "D:\\Programming\\CS\\KarutaWork\\KarutaWorkBot\\KarutaWorkBot\\KarutaWorkBot.csproj",
       "packagesPath": "C:\\Users\\oli\\.nuget\\packages\\",
-      "outputPath": "D:\\Programming\\CS\\KarutaWorkBot\\KarutaWorkBot\\KarutaWorkBot\\obj\\",
+      "outputPath": "D:\\Programming\\CS\\KarutaWork\\KarutaWorkBot\\KarutaWorkBot\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\oli\\AppData\\Roaming\\NuGet\\NuGet.Config",
