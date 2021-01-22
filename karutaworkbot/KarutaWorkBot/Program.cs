@@ -159,7 +159,7 @@ namespace KarutaWorkBot
                             }
                         }
                     }
-                    else if (predictCard != null && embed1.Description.Contains($"Owned by <@{predictCard.user.Id}>"))
+                    else if (predictCard != null)
                     {
                         if (embed1.Description.Contains($"**`{predictCard.code}`**"))
                         {
