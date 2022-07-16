@@ -46,7 +46,7 @@ namespace KarutaWorkBot
 
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-            string token = "Nzg3MDg5OTg0OTA5NjA2OTQ0.X9P4qw.R9GIu3DsFHsRp1IVg1tL7FynsJs";
+            string token = TOKEN;
 
             _client.Log += _client_Log;
 
